@@ -53,16 +53,12 @@ export default function Navbar() {
           <div className="flex justify-between items-center">
             
             {/* Left: Brand Icon & Logo */}
-            <a href="/" className="group flex items-center gap-3 z-50 relative">
-              <div className={`transition-colors duration-500 ${isScrolled ? 'text-amber-500' : 'text-amber-300'}`}>
-                <svg width="32" height="32" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                  <path d="M3 21V9L12 2L21 9V21" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
-                  <path d="M9 21V12H15V21" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
-                </svg>
-              </div>
-              <span className="text-xl font-bold tracking-widest uppercase mt-1">
-                Hotle<span className={isScrolled ? 'text-amber-600' : 'text-amber-300'}>Homes</span>
-              </span>
+            <a href="/" className="group flex items-center z-50 relative py-1">
+            <img 
+                src="/Hotlelogo.png" 
+                alt="Hotle Homes" 
+                className="h-11 sm:h-12 w-auto object-contain transition-transform duration-300 group-hover:scale-105"
+            />
             </a>
 
             {/* Center/Right: Desktop Navigation */}
@@ -75,7 +71,7 @@ export default function Navbar() {
                 >
                   {link.name}
                   {/* Underline hover effect */}
-                  <span className={`absolute left-0 bottom-0 w-full h-[1px] transform -translate-x-full group-hover:translate-x-0 transition-transform duration-300 ease-out ${
+                  <span className={`absolute left-0 bottom-0 w-full h-px transform -translate-x-full group-hover:translate-x-0 transition-transform duration-300 ease-out ${
                     isScrolled ? 'bg-blue-950' : 'bg-white'
                   }`}></span>
                 </a>
@@ -101,14 +97,14 @@ export default function Navbar() {
               aria-label="Toggle menu"
             >
               <div className="w-6 h-5 flex flex-col justify-between items-end">
-                <span className={`block h-[2px] transition-all duration-300 ease-out ${
-                  isMobileMenuOpen ? 'w-6 rotate-45 translate-y-[9px] bg-white' : `w-6 ${isScrolled ? 'bg-blue-950' : 'bg-white'}`
+                <span className={`block h-0.5 transition-all duration-300 ease-out ${
+                  isMobileMenuOpen ? 'w-6 rotate-45 translate-y-2.25 bg-white' : `w-6 ${isScrolled ? 'bg-blue-950' : 'bg-white'}`
                 }`}></span>
-                <span className={`block h-[2px] transition-all duration-300 ease-out ${
+                <span className={`block h-0.5 transition-all duration-300 ease-out ${
                   isMobileMenuOpen ? 'opacity-0 bg-white' : `w-4 ${isScrolled ? 'bg-blue-950' : 'bg-white'}`
                 }`}></span>
-                <span className={`block h-[2px] transition-all duration-300 ease-out ${
-                  isMobileMenuOpen ? 'w-6 -rotate-45 -translate-y-[9px] bg-white' : `w-6 ${isScrolled ? 'bg-blue-950' : 'bg-white'}`
+                <span className={`block h-0.5 transition-all duration-300 ease-out ${
+                  isMobileMenuOpen ? 'w-6 -rotate-45 -translate-y-2.25 bg-white' : `w-6 ${isScrolled ? 'bg-blue-950' : 'bg-white'}`
                 }`}></span>
               </div>
             </button>

@@ -50,7 +50,7 @@ export default function Hero() {
   }, [text, isDeleting, typingSpeed, loopNum]);
 
   return (
-    <section className="relative h-[100dvh] w-full flex items-center justify-center overflow-hidden bg-black">
+    <section className="relative h-dvh w-full flex items-center justify-center overflow-hidden bg-black">
       
       {/* Background Layer */}
       <div className="absolute inset-0 z-0">
@@ -60,19 +60,19 @@ export default function Hero() {
           className="w-full h-full object-cover opacity-90 transition-transform duration-[20s] ease-linear scale-110" 
         />
         <div className="absolute inset-0 bg-blue-950/30 mix-blend-multiply"></div>
-        <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/30 to-black/40"></div>
+        <div className="absolute inset-0 bg-linear-to-t from-black/80 via-black/30 to-black/40"></div>
       </div>
 
       {/* Content Layer */}
       <div className="relative z-10 flex flex-col items-center justify-center px-4 sm:px-6 w-full text-center mt-8 md:mt-0">
         
         {/* Fluid Typography Container */}
-        <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-extrabold tracking-tight mb-6 sm:mb-8 min-h-[120px] sm:min-h-[100px] flex items-center justify-center flex-wrap max-w-5xl mx-auto leading-tight">
-          <span className="bg-gradient-to-r from-white via-amber-100 to-amber-300 bg-clip-text text-transparent drop-shadow-lg text-center">
+        <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-extrabold tracking-tight mb-6 sm:mb-8 min-h-30 sm:min-h-25 flex items-center justify-center flex-wrap max-w-5xl mx-auto leading-tight">
+          <span className="bg-linear-to-r from-white via-amber-100 to-amber-300 bg-clip-text text-transparent drop-shadow-lg text-center">
             {text}
           </span>
           {/* Pulsing Vertical Cursor */}
-          <span className="inline-block w-[2px] sm:w-[3px] h-[0.9em] bg-amber-300 ml-1 sm:ml-2 animate-pulse align-middle shadow-[0_0_8px_rgba(252,211,77,0.6)]"></span>
+          <span className="inline-block w-0.5 sm:w-0.75 h-[0.9em] bg-amber-300 ml-1 sm:ml-2 animate-pulse align-middle shadow-[0_0_8px_rgba(252,211,77,0.6)]"></span>
         </h1>
 
         <div 
