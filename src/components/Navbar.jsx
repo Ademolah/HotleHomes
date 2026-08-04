@@ -31,9 +31,9 @@ export default function Navbar() {
   }, [isMobileMenuOpen]);
 
   const navLinks = [
-    { name: 'Our Portfolio', href: '#portfolio' },
-    { name: 'Who We Are', href: '#about' },
-    { name: 'Visit Us', href: '#contact' },
+    { name: 'Our Portfolio', href: '/portfolio' },
+    { name: 'Who We Are', href: '/about' },
+    { name: 'Visit Us', href: '/contact' },
   ];
 
   return (
