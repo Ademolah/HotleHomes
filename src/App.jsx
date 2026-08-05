@@ -1,16 +1,3 @@
-// import Layout from './components/Layouts';
-// import Home from './pages/Home'
-// import Portfolio from './pages/Portfolio'
-
-// function App() {
-//   return (
-//     <Layout>
-//       <Home />
-//     </Layout>
-//   );
-// }
-
-// export default App;
 
 
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';

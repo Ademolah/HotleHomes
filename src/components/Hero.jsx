@@ -85,7 +85,7 @@ export default function Hero() {
           </p>
 
           <a 
-                href="#portfolio" 
+                href="/portfolio" 
                 className="px-8 py-3.5 sm:px-10 sm:py-4 rounded-full border border-white/40 text-white font-medium tracking-widest uppercase text-xs sm:text-sm hover:bg-white hover:text-blue-950 transition-all duration-500 backdrop-blur-sm"
                 >
                 Enter Portfolio

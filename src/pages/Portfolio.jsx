@@ -107,18 +107,30 @@ export default function Portfolio() {
               >
                 
                 {/* Image Container with Parallax-style Scale Reveal */}
-                <div className="w-full lg:w-3/5 overflow-hidden">
-                  <ScrollReveal direction="scale">
-                    <div className="relative aspect-4/3 md:aspect-16/10 overflow-hidden">
-                      <img 
+                <div className="w-full lg:w-3/5">
+                <ScrollReveal direction="scale">
+                    
+                    {/* --- The Designed Architectural Gallery Frame --- */}
+                    <div className="relative p-2 sm:p-4 bg-white rounded-3xl shadow-[0_10px_40px_-10px_rgba(23,37,84,0.08)] border border-gray-100 transition-all duration-1000 ease-out group-hover:shadow-[0_20px_60px_-15px_rgba(23,37,84,0.15)] group-hover:-translate-y-2">
+                    
+                    {/* Inner Image Mask */}
+                    <div className="relative aspect-4/3 md:aspect-16/10 overflow-hidden rounded-xl sm:rounded-2xl">
+                        <img 
                         src={property.image} 
                         alt={property.title} 
-                        className="w-full h-full object-cover transition-transform duration-2000 ease-out group-hover:scale-105"
-                      />
-                      {/* Subtle dark gradient overlay to ensure premium feel */}
-                      <div className="absolute inset-0 bg-black/10 group-hover:bg-transparent transition-colors duration-1000"></div>
+                        className="w-full h-full object-cover transition-transform duration-2000 ease-out group-hover:scale-110"
+                        />
+                        
+                        {/* Subtle dark gradient overlay to ensure premium feel */}
+                        <div className="absolute inset-0 bg-blue-950/10 group-hover:bg-transparent transition-colors duration-1000"></div>
+                        
+                        {/* Inner glass reflection ring for that ultra-premium crisp edge */}
+                        <div className="absolute inset-0 ring-1 ring-inset ring-black/5 rounded-xl sm:rounded-2xl pointer-events-none"></div>
                     </div>
-                  </ScrollReveal>
+
+                    </div>
+
+                </ScrollReveal>
                 </div>
 
                 {/* Text Content */}
