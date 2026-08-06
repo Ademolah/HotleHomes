@@ -203,7 +203,7 @@ export default function WhoWeAre() {
               Whether acquiring a new primary residence or seeking discreet representation for a luxury sale, our advisors are at your service.
             </p>
             <a 
-              href="#visit-us" 
+              href="/contact" 
               className="inline-block px-10 py-4 bg-white text-blue-950 rounded-full font-medium tracking-widest uppercase text-xs sm:text-sm hover:bg-amber-400 hover:text-blue-950 transition-all duration-500 shadow-2xl"
             >
               Connect With Us

@@ -1,10 +1,12 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import  { useEffect, useRef, useState } from 'react';
+import toast from 'react-hot-toast'
 
 // --- Custom Smooth Scroll Reveal Component ---
 const ScrollReveal = ({ children, direction = "up", delay = 0 }) => {
   const [isVisible, setIsVisible] = useState(false);
   const ref = useRef(null);
+
 
   useEffect(() => {
     const observer = new IntersectionObserver(
@@ -43,7 +45,11 @@ const ScrollReveal = ({ children, direction = "up", delay = 0 }) => {
 };
 
 export default function VisitUs() {
+  
+
+
   const [submitted, setSubmitted] = useState(false);
+  const [isSubmitting, setIsSubmitting] = useState(false); // NEW loading state
   const [formData, setFormData] = useState({
     fullName: '',
     email: '',
@@ -52,6 +58,50 @@ export default function VisitUs() {
     inquiryType: 'Private Acquisition',
     message: ''
   });
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    setIsSubmitting(true); // Start the loading animation
+
+    // Construct the payload for Web3Forms
+    const payload = {
+      access_key: "808586f5-d1d4-434c-8b47-dfe402a4c3b2", 
+      subject: `New Private Inquiry from ${formData.fullName}`,
+      from_name: "Hotle Homes Advisory",
+      name: formData.fullName,
+      email: formData.email,
+      phone: formData.phone,
+      office: formData.office,
+      inquiry_type: formData.inquiryType,
+      message: formData.message,
+    };
+
+    try {
+      const response = await fetch("https://api.web3forms.com/submit", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Accept: "application/json",
+        },
+        body: JSON.stringify(payload),
+      });
+
+      const result = await response.json();
+
+      if (result.success) {
+        setSubmitted(true); 
+        toast.success("Your request has been submitted successfully. A Senior Partner will contact you shortly.");
+      } else {
+        console.error("Submission failed", result);
+        toast.error("There was an issue submitting your request. Please try again.");
+      }
+    } catch (error) {
+      console.error("Error submitting form", error);
+      toast.error("A network error occurred. Please try again.");
+    } finally {
+      setIsSubmitting(false); // Stop the loading animation
+    }
+  };
 
   const offices = [
     {
@@ -83,10 +133,7 @@ export default function VisitUs() {
     }
   ];
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    setSubmitted(true);
-  };
+  
 
   return (
     <div className="w-full bg-white text-blue-950 overflow-hidden">
@@ -298,12 +345,26 @@ export default function VisitUs() {
                 </div>
 
                 <div className="text-center pt-4">
-                  <button 
+                <button 
                     type="submit" 
-                    className="w-full sm:w-auto px-12 py-4 bg-amber-400 text-blue-950 font-semibold tracking-widest uppercase text-xs sm:text-sm rounded-full hover:bg-white transition-all duration-300 shadow-xl"
-                  >
-                    Submit Confidential Request
-                  </button>
+                    disabled={isSubmitting}
+                    className={`w-full sm:w-auto px-12 py-4 bg-amber-400 text-blue-950 font-semibold tracking-widest uppercase text-xs sm:text-sm rounded-full transition-all duration-300 shadow-xl flex items-center justify-center gap-3 mx-auto ${
+                    isSubmitting ? 'opacity-75 cursor-not-allowed' : 'hover:bg-white'
+                    }`}
+                >
+                    {isSubmitting ? (
+                    <>
+                        {/* Elegant loading spinner */}
+                        <svg className="animate-spin h-5 w-5 text-blue-950" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                        <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
+                        <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+                        </svg>
+                        Transmitting...
+                    </>
+                    ) : (
+                    "Submit Confidential Request"
+                    )}
+                </button>
                 </div>
 
               </form>
