@@ -4,6 +4,7 @@ import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import Layout from './components/Layouts';
 import Home from './pages/Home';
 import Portfolio from './pages/Portfolio';
+import WhoWeAre from './pages/WhoWeAre'
 
 function App() {
   return (
@@ -15,6 +16,7 @@ function App() {
           
           {/* Portfolio gallery route */}
           <Route path="/portfolio" element={<Portfolio />} />
+          <Route path="/about" element={<WhoWeAre />} />
         </Routes>
       </Layout>
     </Router>
