@@ -79,7 +79,7 @@ export default function Navbar() {
               
               {/* Desktop CTA Button */}
               <a 
-                href="#inquire" 
+                href="/inquire" 
                 className={`px-6 py-2.5 text-xs font-semibold tracking-widest uppercase transition-all duration-300 border ${
                   isScrolled 
                     ? 'border-blue-950 text-blue-950 hover:bg-blue-950 hover:text-white' 
@@ -144,7 +144,7 @@ export default function Navbar() {
             style={{ transitionDelay: '300ms' }}
           >
             <a 
-              href="#inquire" 
+              href="/inquire" 
               onClick={() => setIsMobileMenuOpen(false)}
               className="block w-full py-4 text-center border border-amber-500/50 text-amber-400 font-medium tracking-widest uppercase text-sm hover:bg-amber-500 hover:text-black transition-colors"
             >

@@ -171,7 +171,7 @@ export default function Portfolio() {
               Our active portfolio contains off-market estates not publicly disclosed. Contact our advisory team for a private consultation.
             </p>
             <a 
-              href="#inquire" 
+              href="/contact" 
               className="inline-block px-10 py-4 bg-blue-950 text-white rounded-full font-medium tracking-widest uppercase text-sm hover:bg-amber-600 transition-colors duration-500 shadow-xl shadow-blue-950/20"
             >
               Contact Advisory
