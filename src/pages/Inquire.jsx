@@ -178,7 +178,7 @@ export default function Inquire() {
               value={formData.phone}
               onChange={(e) => setFormData({...formData, phone: e.target.value})}
               className="w-full bg-transparent border-none p-0 text-blue-950 focus:ring-0 text-base placeholder-gray-300 font-medium outline-none"
-              placeholder="+44 7700 900077"
+              placeholder="+234 700 8000"
             />
           </div>
         </div>
