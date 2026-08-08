@@ -1,7 +1,52 @@
-
+import { useState } from 'react';
+import toast from 'react-hot-toast';
 
 export default function Footer() {
   const currentYear = new Date().getFullYear();
+
+  const [email, setEmail] = useState('');
+  const [status, setStatus] = useState('idle'); 
+
+  const handleSubscribe = async (e) => {
+  e.preventDefault();
+  if (!email) return;
+  
+  setStatus('loading');
+
+  const payload = {
+    access_key: "808586f5-d1d4-434c-8b47-dfe402a4c3b2",
+    email: email
+  }
+  
+  try {
+    
+    const response = await fetch('https://api.web3forms.com/submit', {
+        method: "POST",
+        headers: { "Content-Type": "application/json", Accept: "application/json" },
+        body: JSON.stringify(payload),
+      });
+
+
+    if (!response.ok) throw new Error('Subscription failed');
+
+    const result = await response.json()
+    if (result.success) {
+        toast.success('You have successfully subscribed to the Private Registry!')
+    }
+    setStatus('success');
+    
+    // Reset the form after 4 seconds
+    setTimeout(() => {
+      setStatus('idle');
+      setEmail('');
+    }, 4000);
+    
+  } catch (error) {
+    setStatus('error');
+    setTimeout(() => setStatus('idle'), 4000);
+    console.error(error)
+  }
+};
 
   return (
     <footer className="bg-blue-950 text-white border-t border-white/10">
@@ -19,22 +64,46 @@ export default function Footer() {
               </p>
             </div>
             
-            <div className="w-full lg:w-auto shrink-0">
-              <form className="flex flex-col sm:flex-row gap-4 w-full sm:w-auto" onSubmit={(e) => e.preventDefault()}>
-                <input 
-                  type="email" 
-                  placeholder="Email Address" 
-                  className="w-full sm:w-72 bg-transparent border-b border-white/30 px-2 py-3 text-white placeholder-gray-400 focus:outline-none focus:border-amber-400 transition-colors rounded-none"
-                  required
-                />
-                <button 
-                  type="submit" 
-                  className="px-8 py-3 bg-white text-blue-950 font-medium tracking-widest uppercase text-xs hover:bg-amber-400 transition-colors duration-300"
-                >
-                  Subscribe
-                </button>
-              </form>
-            </div>
+            <div className="w-full lg:w-auto shrink-0 relative">
+  <form className="flex flex-col sm:flex-row gap-4 w-full sm:w-auto relative" onSubmit={handleSubscribe}>
+    
+    <div className="relative w-full sm:w-72">
+      <input 
+        type="email" 
+        value={email}
+        onChange={(e) => setEmail(e.target.value)}
+        disabled={status === 'loading' || status === 'success'}
+        placeholder="Email Address" 
+        className="w-full bg-transparent border-b border-white/30 px-2 py-3 text-white placeholder-gray-400 focus:outline-none focus:border-amber-400 transition-colors rounded-none disabled:opacity-50 disabled:cursor-not-allowed"
+        required
+      />
+      {/* Floating status message - absolutely positioned to prevent layout shift */}
+      <div className={`absolute left-2 -bottom-5 text-[10px] font-medium tracking-widest uppercase transition-all duration-300 ${status === 'success' ? 'opacity-100 text-amber-400' : 'opacity-0'} ${status === 'error' ? 'opacity-100 text-red-400' : ''}`}>
+        {status === 'success' && 'Welcome to the list'}
+        {status === 'error' && 'Something went wrong'}
+      </div>
+    </div>
+
+    <button 
+      type="submit" 
+      disabled={status === 'loading' || status === 'success'}
+      className="px-8 py-3 bg-white text-blue-950 font-medium tracking-widest uppercase text-xs hover:bg-amber-400 transition-colors duration-300 min-w-35 flex items-center justify-center disabled:opacity-80 disabled:hover:bg-white disabled:cursor-not-allowed"
+    >
+      {status === 'idle' && 'Subscribe'}
+      
+      {status === 'loading' && (
+        <svg className="animate-spin h-4 w-4 text-blue-950" viewBox="0 0 24 24">
+          <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4" fill="none"></circle>
+          <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+        </svg>
+      )}
+      
+      {status === 'success' && 'Done'}
+      {status === 'error' && 'Retry'}
+    </button>
+    
+  </form>
+</div>
           </div>
         </div>
       </div>
