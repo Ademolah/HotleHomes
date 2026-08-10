@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+  
   <!-- Homepage -->
   <url>
     <loc>https://www.hotlehomeshq.com/</loc>
@@ -7,4 +8,37 @@
     <changefreq>weekly</changefreq>
     <priority>1.0</priority>
   </url>
+
+  <!-- Portfolio / Property Showcase -->
+  <url>
+    <loc>https://www.hotlehomeshq.com/portfolio</loc>
+    <lastmod>2026-08-10</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+  </url>
+
+  <!-- About / Corporate Ethos -->
+  <url>
+    <loc>https://www.hotlehomeshq.com/about</loc>
+    <lastmod>2026-08-10</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <!-- Inquire (High Conversion Value) -->
+  <url>
+    <loc>https://www.hotlehomeshq.com/inquire</loc>
+    <lastmod>2026-08-10</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <!-- Contact -->
+  <url>
+    <loc>https://www.hotlehomeshq.com/contact</loc>
+    <lastmod>2026-08-10</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.7</priority>
+  </url>
+
 </urlset>
