@@ -1,26 +1,69 @@
+import { useEffect, useRef, useState } from 'react';
 import Hero from '../components/Hero';
 
+
+
+const ScrollReveal = ({ children, className = "" }) => {
+  const [isVisible, setIsVisible] = useState(false);
+  const ref = useRef(null);
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          setIsVisible(true);
+          // Un-observe after revealing so it doesn't flicker when scrolling back up
+          observer.unobserve(entry.target);
+        }
+      },
+      { 
+        threshold: 0.15, // Triggers when 15% of the card is visible 
+        rootMargin: "0px 0px -50px 0px" // Triggers slightly before it hits the bottom of the screen
+      }
+    );
+    
+    if (ref.current) observer.observe(ref.current);
+    return () => observer.disconnect();
+  }, []);
+
+  return (
+    <div
+      ref={ref}
+      className={`transition-all duration-1000 ease-out transform ${
+        isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-16"
+      } ${className}`}
+    >
+      {children}
+    </div>
+  );
+};
+
 export default function Home() {
+
+  
   return (
     <div className="w-full bg-[#FAFAFA] selection:bg-amber-100 selection:text-blue-950 overflow-x-hidden">
       {/* 1. Hero Section */}
       <Hero />
 
       {/* 2. Corporate Brand Ethos & Pillars Section */}
-      <section className="py-20 lg:py-36 relative overflow-hidden">
-        {/* Ambient Glow Effects for Cinematic Visual Depth */}
-        <div className="absolute top-1/4 -left-32 w-96 h-96 bg-amber-200/30 rounded-full blur-3xl pointer-events-none" />
-        <div className="absolute bottom-10 -right-32 w-96 h-96 bg-blue-200/30 rounded-full blur-3xl pointer-events-none" />
+      <section className="py-20 lg:py-36 relative">
+        
+        {/* FIXED: Independent Layer for Background Glows (Restores Sticky) */}
+        <div className="absolute inset-0 overflow-hidden pointer-events-none">
+          <div className="absolute top-1/4 -left-32 w-96 h-96 bg-amber-200/30 rounded-full blur-3xl" />
+          <div className="absolute bottom-10 -right-32 w-96 h-96 bg-blue-200/30 rounded-full blur-3xl" />
+        </div>
 
         <div className="max-w-7xl mx-auto px-5 sm:px-8 lg:px-12 relative z-10">
           <div className="flex flex-col lg:flex-row gap-16 lg:gap-28">
             
-            {/* Left Column: Sticky Editorial Header (Unchanged on Desktop) */}
-            <div className="lg:w-5/12">
+            {/* Left Column: Sticky Editorial Header (Fixed & Working) */}
+            <div className="lg:w-5/12 relative">
               <div className="lg:sticky lg:top-32 text-center lg:text-left">
                 <div className="inline-flex items-center gap-3 mb-6">
-                  <span className="h-px w-8 bg-amber-500 hidden lg:inline-block"></span>
-                  <span className="text-xs font-bold tracking-[0.25em] uppercase text-amber-600 bg-amber-50 px-3.5 py-1.5 lg:px-0 lg:py-0 rounded-full border border-amber-200/50 lg:border-none">
+                  <span className="h-px w-8 bg-amber-500 inline-block"></span>
+                  <span className="text-xs font-bold tracking-[0.25em] uppercase text-amber-600">
                     The Hotle Standard
                   </span>
                 </div>
@@ -39,73 +82,79 @@ export default function Home() {
               </div>
             </div>
 
-            {/* Right Column: 3 Pillars (Alternating Mobile Alignment + Colorful Text) */}
+            {/* Right Column: 3 Pillars with Cinematic Scroll Reveals */}
             <div className="lg:w-7/12 flex flex-col gap-10 sm:gap-16 mt-6 lg:mt-0">
               
-              {/* Pillar 1: Left Aligned on Mobile */}
-              <div className="group flex flex-col items-start text-left sm:flex-row sm:items-start gap-6 sm:gap-8 bg-white/80 backdrop-blur-md p-6 sm:p-0 rounded-3xl sm:bg-transparent border border-blue-50 sm:border-none shadow-sm sm:shadow-none transition-all duration-500">
-                <div className="shrink-0 p-4 rounded-2xl bg-gradient-to-br from-blue-50 to-indigo-100/50 shadow-md border border-blue-100/80 group-hover:scale-105 group-hover:shadow-xl transition-all duration-500">
-                  <svg width="56" height="56" viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <rect width="64" height="64" rx="16" fill="#EFF6FF"/>
-                    <path d="M16 48V28L32 16L48 28V48H16Z" fill="#1E3A8A" fillOpacity="0.15"/>
-                    <path d="M24 48V32H40V48H24Z" fill="#F59E0B"/>
-                    <path d="M32 16L16 28L18 30L32 19.5L46 30L48 28L32 16Z" fill="#1E3A8A"/>
-                    <circle cx="32" cy="24" r="3.5" fill="#0284C7"/>
-                  </svg>
+              {/* Pillar 1 */}
+              <ScrollReveal>
+                <div className="group flex flex-col items-start text-left sm:flex-row sm:items-start gap-6 sm:gap-8 bg-white/80 backdrop-blur-md p-6 sm:p-0 rounded-3xl sm:bg-transparent border border-blue-50 sm:border-none shadow-sm sm:shadow-none transition-all duration-500">
+                  <div className="shrink-0 p-4 rounded-2xl bg-gradient-to-br from-blue-50 to-indigo-100/50 shadow-md border border-blue-100/80 group-hover:scale-105 group-hover:shadow-xl transition-all duration-500">
+                    <svg width="56" height="56" viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
+                      <rect width="64" height="64" rx="16" fill="#EFF6FF"/>
+                      <path d="M16 48V28L32 16L48 28V48H16Z" fill="#1E3A8A" fillOpacity="0.15"/>
+                      <path d="M24 48V32H40V48H24Z" fill="#F59E0B"/>
+                      <path d="M32 16L16 28L18 30L32 19.5L46 30L48 28L32 16Z" fill="#1E3A8A"/>
+                      <circle cx="32" cy="24" r="3.5" fill="#0284C7"/>
+                    </svg>
+                  </div>
+                  <div>
+                    <span className="text-[11px] font-extrabold tracking-widest text-amber-600 uppercase mb-1 block">01 / Architectural Curation</span>
+                    <h3 className="text-2xl font-bold text-blue-950 mb-2 group-hover:text-amber-600 transition-colors duration-300">
+                      Structural <span className="bg-gradient-to-r from-blue-950 to-blue-700 bg-clip-text text-transparent">Artistry</span>
+                    </h3>
+                    <p className="text-slate-600 text-sm sm:text-base leading-relaxed">
+                      We represent properties that <span className="text-blue-950 font-semibold">redefine skyline aesthetics</span>, combining sustainable engineering with monumental structural mastery.
+                    </p>
+                  </div>
                 </div>
-                <div>
-                  <span className="text-[11px] font-extrabold tracking-widest text-amber-600 uppercase mb-1 block">01 / Architectural Curation</span>
-                  <h3 className="text-2xl font-bold text-blue-950 mb-2 group-hover:text-amber-600 transition-colors duration-300">
-                    Structural <span className="bg-gradient-to-r from-blue-950 to-blue-700 bg-clip-text text-transparent">Artistry</span>
-                  </h3>
-                  <p className="text-slate-600 text-sm sm:text-base leading-relaxed">
-                    We represent properties that <span className="text-blue-950 font-semibold">redefine skyline aesthetics</span>, combining sustainable engineering with monumental structural mastery.
-                  </p>
-                </div>
-              </div>
+              </ScrollReveal>
 
-              {/* Pillar 2: Right Aligned on Mobile (Cinematic Alternating Step) */}
-              <div className="group flex flex-col items-end text-right sm:flex-row sm:items-start sm:text-left gap-6 sm:gap-8 bg-amber-50/60 backdrop-blur-md p-6 sm:p-0 rounded-3xl sm:bg-transparent border border-amber-100 sm:border-none shadow-sm sm:shadow-none transition-all duration-500 self-end sm:self-auto w-full">
-                <div className="shrink-0 p-4 rounded-2xl bg-gradient-to-br from-amber-50 to-orange-100/50 shadow-md border border-amber-200/80 group-hover:scale-105 group-hover:shadow-xl transition-all duration-500 sm:order-first">
-                  <svg width="56" height="56" viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <rect width="64" height="64" rx="16" fill="#FFFBEB"/>
-                    <path d="M32 16L48 32L32 48L16 32L32 16Z" fill="#F59E0B" fillOpacity="0.25"/>
-                    <path d="M32 22L42 32L32 42L22 32L32 22Z" fill="#1E3A8A"/>
-                    <path d="M32 16L48 32H16L32 16Z" fill="#D97706"/>
-                    <circle cx="32" cy="32" r="4" fill="#0EA5E9"/>
-                  </svg>
+              {/* Pillar 2 */}
+              <ScrollReveal>
+                <div className="group flex flex-col items-end text-right sm:flex-row sm:items-start sm:text-left gap-6 sm:gap-8 bg-amber-50/60 backdrop-blur-md p-6 sm:p-0 rounded-3xl sm:bg-transparent border border-amber-100 sm:border-none shadow-sm sm:shadow-none transition-all duration-500 self-end sm:self-auto w-full">
+                  <div className="shrink-0 p-4 rounded-2xl bg-gradient-to-br from-amber-50 to-orange-100/50 shadow-md border border-amber-200/80 group-hover:scale-105 group-hover:shadow-xl transition-all duration-500 sm:order-first">
+                    <svg width="56" height="56" viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
+                      <rect width="64" height="64" rx="16" fill="#FFFBEB"/>
+                      <path d="M32 16L48 32L32 48L16 32L32 16Z" fill="#F59E0B" fillOpacity="0.25"/>
+                      <path d="M32 22L42 32L32 42L22 32L32 22Z" fill="#1E3A8A"/>
+                      <path d="M32 16L48 32H16L32 16Z" fill="#D97706"/>
+                      <circle cx="32" cy="32" r="4" fill="#0EA5E9"/>
+                    </svg>
+                  </div>
+                  <div>
+                    <span className="text-[11px] font-extrabold tracking-widest text-amber-700 uppercase mb-1 block">02 / Private Wealth</span>
+                    <h3 className="text-2xl font-bold text-blue-950 mb-2 group-hover:text-amber-600 transition-colors duration-300">
+                      Discreet <span className="bg-gradient-to-r from-amber-600 to-amber-800 bg-clip-text text-transparent">Advisory</span>
+                    </h3>
+                    <p className="text-slate-600 text-sm sm:text-base leading-relaxed">
+                      High-touch consultation for <span className="text-blue-950 font-semibold">UHNW individuals & family offices</span> acquiring signature international real estate holdings.
+                    </p>
+                  </div>
                 </div>
-                <div>
-                  <span className="text-[11px] font-extrabold tracking-widest text-amber-700 uppercase mb-1 block">02 / Private Wealth</span>
-                  <h3 className="text-2xl font-bold text-blue-950 mb-2 group-hover:text-amber-600 transition-colors duration-300">
-                    Discreet <span className="bg-gradient-to-r from-amber-600 to-amber-800 bg-clip-text text-transparent">Advisory</span>
-                  </h3>
-                  <p className="text-slate-600 text-sm sm:text-base leading-relaxed">
-                    High-touch consultation for <span className="text-blue-950 font-semibold">UHNW individuals & family offices</span> acquiring signature international real estate holdings.
-                  </p>
-                </div>
-              </div>
+              </ScrollReveal>
 
-              {/* Pillar 3: Left Aligned on Mobile */}
-              <div className="group flex flex-col items-start text-left sm:flex-row sm:items-start gap-6 sm:gap-8 bg-white/80 backdrop-blur-md p-6 sm:p-0 rounded-3xl sm:bg-transparent border border-teal-50 sm:border-none shadow-sm sm:shadow-none transition-all duration-500">
-                <div className="shrink-0 p-4 rounded-2xl bg-gradient-to-br from-teal-50 to-emerald-100/50 shadow-md border border-teal-100/80 group-hover:scale-105 group-hover:shadow-xl transition-all duration-500">
-                  <svg width="56" height="56" viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <rect width="64" height="64" rx="16" fill="#F0FDFA"/>
-                    <path d="M20 44V36C20 29.3726 25.3726 24 32 24C38.6274 24 44 29.3726 44 36V44" stroke="#1E3A8A" strokeWidth="4"/>
-                    <rect x="24" y="32" width="16" height="12" rx="2" fill="#F59E0B"/>
-                    <path d="M16 48H48" stroke="#0EA5E9" strokeWidth="4" strokeLinecap="round"/>
-                  </svg>
+              {/* Pillar 3 */}
+              <ScrollReveal>
+                <div className="group flex flex-col items-start text-left sm:flex-row sm:items-start gap-6 sm:gap-8 bg-white/80 backdrop-blur-md p-6 sm:p-0 rounded-3xl sm:bg-transparent border border-teal-50 sm:border-none shadow-sm sm:shadow-none transition-all duration-500">
+                  <div className="shrink-0 p-4 rounded-2xl bg-gradient-to-br from-teal-50 to-emerald-100/50 shadow-md border border-teal-100/80 group-hover:scale-105 group-hover:shadow-xl transition-all duration-500">
+                    <svg width="56" height="56" viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
+                      <rect width="64" height="64" rx="16" fill="#F0FDFA"/>
+                      <path d="M20 44V36C20 29.3726 25.3726 24 32 24C38.6274 24 44 29.3726 44 36V44" stroke="#1E3A8A" strokeWidth="4"/>
+                      <rect x="24" y="32" width="16" height="12" rx="2" fill="#F59E0B"/>
+                      <path d="M16 48H48" stroke="#0EA5E9" strokeWidth="4" strokeLinecap="round"/>
+                    </svg>
+                  </div>
+                  <div>
+                    <span className="text-[11px] font-extrabold tracking-widest text-emerald-600 uppercase mb-1 block">03 / Interior Design</span>
+                    <h3 className="text-2xl font-bold text-blue-950 mb-2 group-hover:text-amber-600 transition-colors duration-300">
+                      Bespoke <span className="bg-gradient-to-r from-emerald-600 to-teal-800 bg-clip-text text-transparent">Sanctuaries</span>
+                    </h3>
+                    <p className="text-slate-600 text-sm sm:text-base leading-relaxed">
+                      Collaborating with world-renowned interior architects to transform expansive raw spaces into <span className="text-blue-950 font-semibold">tailored living art</span>.
+                    </p>
+                  </div>
                 </div>
-                <div>
-                  <span className="text-[11px] font-extrabold tracking-widest text-emerald-600 uppercase mb-1 block">03 / Interior Design</span>
-                  <h3 className="text-2xl font-bold text-blue-950 mb-2 group-hover:text-amber-600 transition-colors duration-300">
-                    Bespoke <span className="bg-gradient-to-r from-emerald-600 to-teal-800 bg-clip-text text-transparent">Sanctuaries</span>
-                  </h3>
-                  <p className="text-slate-600 text-sm sm:text-base leading-relaxed">
-                    Collaborating with world-renowned interior architects to transform expansive raw spaces into <span className="text-blue-950 font-semibold">tailored living art</span>.
-                  </p>
-                </div>
-              </div>
+              </ScrollReveal>
 
             </div>
           </div>
