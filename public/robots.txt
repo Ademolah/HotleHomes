@@ -1,0 +1,5 @@
+User-agent: *
+Allow: /
+
+# Point Google directly to your map of the site
+Sitemap: https://www.hotlehomeshq.com/sitemap.xml
