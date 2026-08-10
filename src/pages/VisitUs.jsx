@@ -212,7 +212,7 @@ export default function VisitUs() {
                     </div>
 
                     <a 
-                      href="#inquire-form" 
+                      href="/inquire" 
                       onClick={() => setFormData({ ...formData, office: office.city })}
                       className="w-full py-3 border border-blue-950/20 text-blue-950 text-center rounded-full text-xs font-semibold tracking-widest uppercase hover:bg-blue-950 hover:text-white transition-all duration-300 block"
                     >

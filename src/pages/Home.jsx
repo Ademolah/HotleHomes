@@ -219,11 +219,11 @@ export default function Home() {
               <div className="flex flex-col sm:flex-row items-start sm:items-center gap-4 w-full md:w-auto justify-between">
                 <div>
                   <span className="text-[10px] uppercase text-gray-400 tracking-widest block font-medium">Guide Price</span>
-                  <span className="text-2xl sm:text-3xl font-extrabold text-amber-400">₦152,000,000</span>
+                  <span className="text-2xl sm:text-3xl font-extrabold text-amber-400">₦252,000,000</span>
                 </div>
 
                 <a 
-                  href="#inquire" 
+                  href="/inquire" 
                   className="px-6 py-3.5 bg-white text-blue-950 hover:bg-amber-400 transition-all duration-300 rounded-full text-xs font-bold tracking-widest uppercase shadow-lg hover:shadow-amber-400/20 hover:-translate-y-0.5 text-center w-full sm:w-auto"
                 >
                   Request Dossier

@@ -140,11 +140,12 @@ export default function WhoWeAre() {
 
                 <div className="pt-6 border-t border-gray-200 flex items-center justify-between">
                   <div>
+                    <h3 className="text-lg font-bold text-blue-950">Liberty Brown Moses</h3>
                     <h3 className="text-lg font-bold text-blue-950">Chief Executive Officer</h3>
                     <p className="text-sm text-gray-400">Hotle Homes Global</p>
                   </div>
                   <a 
-                    href="#contact" 
+                    href="/contact" 
                     className="px-6 py-3 rounded-full border border-blue-950 text-blue-950 text-xs font-semibold tracking-widest uppercase hover:bg-blue-950 hover:text-white transition-all duration-300"
                   >
                     Private Counsel
