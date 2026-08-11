@@ -6,6 +6,7 @@ import Portfolio from './pages/Portfolio';
 import WhoWeAre from './pages/WhoWeAre';
 import VisitUs from './pages/VisitUs';
 import Inquire from './pages/Inquire'
+import PropertyCard from './pages/Purchase'
 
 function App() {
   return (
@@ -50,6 +51,7 @@ function App() {
           <Route path="/about" element={<WhoWeAre />} />
           <Route path="/contact" element={<VisitUs />} />
           <Route path="/inquire" element={<Inquire />} />
+          <Route path="/purchase" element={<PropertyCard />} />
         </Routes>
       </Layout>
     </Router>

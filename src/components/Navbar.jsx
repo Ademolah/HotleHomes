@@ -33,6 +33,7 @@ export default function Navbar() {
   const navLinks = [
     { name: 'Our Portfolio', href: '/portfolio' },
     { name: 'Who We Are', href: '/about' },
+    { name: 'Buy Property', href: '/purchase' },
     { name: 'Visit Us', href: '/contact' },
   ];
 

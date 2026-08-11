@@ -1,5 +1,6 @@
 import { useEffect, useRef, useState } from 'react';
 import Hero from '../components/Hero';
+import prop1_1 from '../assets/prop1_1.jpg';
 
 
 
@@ -160,6 +161,82 @@ export default function Home() {
           </div>
         </div>
       </section>
+
+      {/* 3. Portfolio Invitation Section */}
+<section className="py-24 lg:py-32 relative bg-white overflow-hidden">
+  
+  {/* Subtle Background Accent for Desktop */}
+  <div className="absolute top-0 right-0 w-1/2 h-full bg-slate-50/50 rounded-l-[4rem] pointer-events-none hidden lg:block" />
+
+  <div className="max-w-7xl mx-auto px-5 sm:px-8 lg:px-12 relative z-10">
+    <div className="flex flex-col lg:flex-row items-center gap-16 lg:gap-24">
+      
+      {/* Left Visual Side: Cinematic Image Composition */}
+      <div className="w-full lg:w-1/2 relative group cursor-pointer">
+        {/* Main Image Container */}
+        <div className="aspect-[4/5] sm:aspect-square lg:aspect-[4/5] rounded-3xl overflow-hidden shadow-xl relative z-10">
+          
+          {/* REPLACE with one of your actual property images */}
+          <img 
+            src={prop1_1}
+            alt="Curated Luxury Real Estate" 
+            className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-1000 ease-out"
+          />
+          
+          {/* Dark Gradient Overlay for text contrast */}
+          <div className="absolute inset-0 bg-gradient-to-t from-blue-950/80 via-blue-950/20 to-transparent pointer-events-none" />
+          
+          {/* Floating Aesthetic Glass Box */}
+          <div className="absolute bottom-6 left-6 right-6 sm:bottom-10 sm:left-10 sm:right-10">
+            <div className="backdrop-blur-md bg-white/10 border border-white/20 p-5 sm:p-6 rounded-2xl transform translate-y-2 group-hover:translate-y-0 transition-transform duration-500">
+              <p className="text-white text-sm sm:text-base font-light tracking-wide leading-relaxed italic">
+                "Not just a residence, but a timeless statement of legacy."
+              </p>
+            </div>
+          </div>
+        </div>
+        
+        {/* Ambient Glow Behind Image */}
+        <div className="absolute -bottom-10 -right-10 w-64 h-64 bg-amber-400/20 rounded-full blur-3xl -z-10 transition-opacity duration-500 group-hover:opacity-100 opacity-60" />
+      </div>
+
+      {/* Right Content Side */}
+      <div className="w-full lg:w-1/2">
+        <div className="inline-flex items-center gap-3 mb-6">
+          <span className="h-px w-8 bg-amber-500 inline-block"></span>
+          <span className="text-[11px] font-bold tracking-[0.25em] uppercase text-amber-600">
+            The Portfolio
+          </span>
+        </div>
+        
+        <h2 className="text-4xl sm:text-5xl font-bold tracking-tight text-blue-950 leading-[1.15] mb-6">
+          Acquire a <br className="hidden sm:inline" />
+          <span className="font-serif italic font-light text-amber-700">Signature</span> Sanctuary
+        </h2>
+        
+        <p className="text-base sm:text-lg text-slate-600 leading-relaxed mb-10 max-w-lg">
+          Step into our private gallery of ultra-prime real estate. Each active listing in our collection is rigorously vetted for architectural brilliance, location prestige, and absolute exclusivity. 
+        </p>
+        
+        {/* The Link Button - Note: If using React Router, change <a> to <Link to="/portfolio"> */}
+        <a 
+          href="/portfolio" 
+          className="group inline-flex items-center justify-center gap-4 bg-blue-950 text-white px-8 py-4 rounded-full font-semibold transition-all duration-300 hover:bg-amber-600 hover:shadow-xl hover:shadow-amber-600/20"
+        >
+          Explore Available Properties
+          
+          {/* Animated Arrow */}
+          <span className="group-hover:translate-x-1.5 transition-transform duration-300">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M5 12H19M19 12L12 5M19 12L12 19" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"/>
+            </svg>
+          </span>
+        </a>
+      </div>
+
+    </div>
+  </div>
+</section>
 
       {/* 3. NEW SECTION: Cinematic Signature Estate Showcase */}
       <section className="relative py-24 sm:py-32 bg-blue-950 text-white overflow-hidden">
