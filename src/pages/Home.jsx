@@ -220,7 +220,7 @@ export default function Home() {
         
         {/* The Link Button - Note: If using React Router, change <a> to <Link to="/portfolio"> */}
         <a 
-          href="/portfolio" 
+          href="/purchase" 
           className="group inline-flex items-center justify-center gap-4 bg-blue-950 text-white px-8 py-4 rounded-full font-semibold transition-all duration-300 hover:bg-amber-600 hover:shadow-xl hover:shadow-amber-600/20"
         >
           Explore Available Properties
